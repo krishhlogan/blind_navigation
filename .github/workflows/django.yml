@@ -1,28 +1,17 @@
 name: reviewdog
-
 on:
   pull_request:
     branches:
       - master
 
 jobs:
-  linter:
-    name: runner / linter
+  pyright:
+    name: pyright
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
     steps:
       - uses: actions/checkout@v2
+      - uses: jordemort/action-pyright@v1
         with:
-          fetch-depth: 1
-          ref: ${{ github.head_ref }}
-
-
-      - name: wemake-python-styleguide
-        uses: wemake-services/wemake-python-styleguide
-        with:
-          reporter: 'github-pr-review'
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }} # You need this
+          reporter: github-pr-review # Change reporter.
+          lib: true
