@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  eslint:
+  linter:
     name: runner / linter
     runs-on: ubuntu-latest
     permissions:
@@ -18,6 +18,7 @@ jobs:
         with:
           fetch-depth: 1
           ref: ${{ github.head_ref }}
+
 
       - name: wemake-python-styleguide
         uses: wemake-services/wemake-python-styleguide
